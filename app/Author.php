@@ -14,6 +14,7 @@ class Author extends Base
 
     public function chapters()
     {
-        $this->hasManyThrough('App\ChapterAuthor','App\Chapter');
+        return $this->hasMany('App\ChapterAuthor');
+        return $this->hasManyThrough('App\Chapter','App\ChapterAuthor','author_id','id','chapter_id');
     }
 }

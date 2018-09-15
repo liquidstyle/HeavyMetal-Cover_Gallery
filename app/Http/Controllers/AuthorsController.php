@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Title;
+use App\Author;
 
-class TitlesController extends Controller
+class AuthorsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,20 +15,21 @@ class TitlesController extends Controller
      */
     public function index(Request $request)
     {
+
         $format = $request->input('format');
-        $titles = Title::orderBy('yearmonth','asc')->paginate(25);
+        $authors = Author::orderBy('name','asc')->paginate(25);
 
         switch($format)
         {
             case 'list':
-                $view = 'pages.titles.index_list';
+                $view = 'pages.authors.index_list';
                 break;
             default:
-                $view = 'pages.titles.index_grid';
+                $view = 'pages.authors.index_grid';
                 break;
         }
         
-        return view($view)->with('titles',$titles);
+        return view($view)->with('authors',$authors);
     }
 
     /**
@@ -60,8 +61,8 @@ class TitlesController extends Controller
      */
     public function show($id)
     {
-        $title = Title::find($id);
-        return view('pages.titles.show')->with('title',$title);
+        $author = Author::find($id);
+        return view('pages.authors.show')->with('author',$author);
     }
 
     /**

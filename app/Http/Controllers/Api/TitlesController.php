@@ -16,7 +16,7 @@ class TitlesController extends Controller
      */
     public function index()
     {
-        return Title::with('chapters')->paginate(10);
+        return Title::with('chapters')->paginate(25);
     }
 
     /**

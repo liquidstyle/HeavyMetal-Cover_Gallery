@@ -20,3 +20,11 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::resource('/ingest', 'IngestController');
+
+Route::resource('/profile', 'ProfileController');
+
+Route::resource('/titles', 'TitlesController');
+
+Route::resource('/authors', 'AuthorsController');
+
+Route::resource('/activity', 'ActivitiesController');

@@ -16,7 +16,7 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        return Author::paginate(10);
+        return Author::with('chapters')->paginate(25);
     }
 
     /**

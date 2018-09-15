@@ -4,31 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Title;
+use App\User;
 
-class TitlesController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $format = $request->input('format');
-        $titles = Title::orderBy('yearmonth','asc')->paginate(25);
-
-        switch($format)
-        {
-            case 'list':
-                $view = 'pages.titles.index_list';
-                break;
-            default:
-                $view = 'pages.titles.index_grid';
-                break;
-        }
-        
-        return view($view)->with('titles',$titles);
+        //
     }
 
     /**
@@ -60,8 +47,8 @@ class TitlesController extends Controller
      */
     public function show($id)
     {
-        $title = Title::find($id);
-        return view('pages.titles.show')->with('title',$title);
+        $user = User::find($id);
+        return view('pages.profile.show')->with('user',$user);
     }
 
     /**

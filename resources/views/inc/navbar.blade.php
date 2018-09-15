@@ -19,18 +19,18 @@
                 @guest
                 @else
                 <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="{{ url('/titles') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        All Titles <span class="caret"></span>
+                    <a id="navbar" class="nav-link" href="/activity" aria-expanded="false">
+                        Activity Feed
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="{{ url('/titles') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        View As Grid <span class="caret"></span>
+                    <a id="navbar" class="nav-link" href="/titles?format=list" aria-expanded="false">
+                        Titles 
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="{{ url('/titles') }}?format=list" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        View As List <span class="caret"></span>
+                    <a id="navbar" class="nav-link" href="/authors?format=list" aria-expanded="false">
+                        Authors
                     </a>
                 </li>
                 @endguest
@@ -53,7 +53,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/profile">
+                        <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}">
                                 My Profile
                             </a>
                             <a class="dropdown-item" href="/titles?format=grid&filter=owned">
