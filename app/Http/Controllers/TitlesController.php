@@ -18,16 +18,16 @@ class TitlesController extends Controller
         $format = $request->input('format');
         $titles = Title::orderBy('yearmonth','asc')->paginate(25);
 
-        switch($format)
-        {
-            case 'list':
-                $view = 'pages.titles.index_list';
-                break;
-            default:
-                $view = 'pages.titles.index_grid';
-                break;
-        }
-        
+        // switch($format)
+        // {
+        //     case 'list':
+        //         $view = 'pages.titles.index_list';
+        //         break;
+        //     default:
+        //         $view = 'pages.titles.index_grid';
+        //         break;
+        // }
+        $view = 'pages.titles.index_list';
         return view($view)->with('titles',$titles);
     }
 
