@@ -13,3 +13,5 @@ yarn-error.log
 .env
 .phpunit.result.cache
 /laradock
+.DS_Store
+/public/data/data.json

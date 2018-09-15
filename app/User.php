@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,6 +11,22 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public $incrementing = false;
+
+    public $keyType = 'string';
+    
+    /**
+     * Boot the Model.
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($instance) {
+            $instance->id = Str::upper(Str::uuid());
+        });
+    }
+    
     /**
      * The attributes that are mass assignable.
      *

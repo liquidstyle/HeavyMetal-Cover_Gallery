@@ -19,17 +19,17 @@
                 @guest
                 @else
                 <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="{{ url('/covers') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        Covers <span class="caret"></span>
+                    <a id="navbar" class="nav-link" href="{{ url('/titles') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        All Titles <span class="caret"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="{{ url('/covers') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <a id="navbar" class="nav-link" href="{{ url('/titles') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         View As Grid <span class="caret"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="{{ url('/covers') }}?format=list" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <a id="navbar" class="nav-link" href="{{ url('/titles') }}?format=list" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         View As List <span class="caret"></span>
                     </a>
                 </li>
@@ -56,16 +56,16 @@
                             <a class="dropdown-item" href="/profile">
                                 My Profile
                             </a>
-                            <a class="dropdown-item" href="/covers?format=grid&filter=owned">
+                            <a class="dropdown-item" href="/titles?format=grid&filter=owned">
                                 My Collection
                             </a>
-                            <a class="dropdown-item" href="/covers?format=grid&filter=notowned">
+                            <a class="dropdown-item" href="/titles?format=grid&filter=notowned">
                                 NOT In My Collection
                             </a>
-                            <a class="dropdown-item" href="/covers?format=grid&filter=favorites">
+                            <a class="dropdown-item" href="/titles?format=grid&filter=favorites">
                                 My Favorites
                             </a>
-                            <a class="dropdown-item" href="/covers?format=grid&filter=wishlist">
+                            <a class="dropdown-item" href="/titles?format=grid&filter=wishlist">
                                 My Wishlist
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}" style="font-weight:bold;color:red;"
