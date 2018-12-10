@@ -13,8 +13,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+  
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/chosen.min.css') }}" rel="stylesheet">
@@ -24,7 +23,12 @@
 
 </head>
 <body>
-    
+    @if (env('APP_ENV') == 'local')
+        <div class="alert alert-info text-center" style="margin-bottom:0px;"><i class="fab fa-docker"></i> Docker Environment</div>
+    @elseif(env('APP_ENV') == 'development')
+        <div class="alert alert-warning text-center" style="margin-bottom:0px;"><i class="fa fa-cog"></i> Development Environment</div>
+    @endif
+
     @include('inc.navbar')
 
     <div class="container">
@@ -41,7 +45,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/chosen.jquery.min.js') }}" defer></script>
 
     <!-- Additional Page Scripts -->
     @yield('scripts')

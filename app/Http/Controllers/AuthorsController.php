@@ -22,10 +22,10 @@ class AuthorsController extends Controller
         switch($format)
         {
             case 'list':
-                $view = 'pages.authors.index_list';
+                $view = 'pages.public.authors.index_list';
                 break;
             default:
-                $view = 'pages.authors.index_grid';
+                $view = 'pages.public.authors.index_grid';
                 break;
         }
         

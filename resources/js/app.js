@@ -16,6 +16,12 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('covers', require('./components/CoversComponent.vue'));
+
+// import ES6 style
+import {VueMasonryPlugin} from 'vue-masonry';
+
+Vue.use(VueMasonryPlugin)
 
 const app = new Vue({
     el: '#app'

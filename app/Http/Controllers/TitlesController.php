@@ -15,20 +15,7 @@ class TitlesController extends Controller
      */
     public function index(Request $request)
     {
-        $format = $request->input('format');
-        $titles = Title::orderBy('yearmonth','asc')->paginate(25);
-
-        // switch($format)
-        // {
-        //     case 'list':
-        //         $view = 'pages.titles.index_list';
-        //         break;
-        //     default:
-        //         $view = 'pages.titles.index_grid';
-        //         break;
-        // }
-        $view = 'pages.titles.index_list';
-        return view($view)->with('titles',$titles);
+        return view('pages.public.titles.index_vue')->with('user',\Auth::user());
     }
 
     /**

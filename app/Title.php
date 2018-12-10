@@ -20,6 +20,10 @@ class Title extends Base
         'back_cover_path',
         'back_cover_name',
         'back_cover_author',
+        'description',
+        'signed_by',
+        'active',
+        'status'
     ];
 
     public function chapters()

@@ -13,7 +13,7 @@ class ActivitiesController extends Controller
      */
     public function index()
     {
-        return view('pages.activity.index');
+        return view('pages.public.activity.index');
     }
 
     /**

@@ -11,20 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', 'TitlesController@index');
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+// Public 
+Route::get('/dashboard', 'ActivitiesController@index')->name('dashboard');
+Route::get('/profile', 'ProfileController@index');
+Route::get('/titles', 'TitlesController@index');
+Route::get('/authors', 'AuthorsController@index');
+Route::get('/activity', 'ActivitiesController@index');
 
-Route::resource('/ingest', 'IngestController');
-
-Route::resource('/profile', 'ProfileController');
-
-Route::resource('/titles', 'TitlesController');
-
-Route::resource('/authors', 'AuthorsController');
-
-Route::resource('/activity', 'ActivitiesController');
+// Manager Routes
+Route::get('/manager/titles/create', 'Manager\TitlesController@create');
+Route::resource('/manager/titles', 'Manager\TitlesController');
+Route::resource('/manager/authors', 'Manager\AuthorsController');
+Route::resource('/manager/users', 'Manager\UsersController');
+Route::resource('/manager/ingest', 'Manager\IngestController');
+Route::resource('/manager', 'Manager\DashboardController');
