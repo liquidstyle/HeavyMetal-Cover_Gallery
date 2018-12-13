@@ -44,13 +44,13 @@
                     <ul class="navbar-nav mr-auto">
                        
                         <li class="nav-item">
-                            <a id="navbar" class="nav-link" href="/manager/titles" aria-expanded="false">
-                                Titles 
+                            <a id="navbar" class="nav-link" href="/manager/items" aria-expanded="false">
+                                Items 
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a id="navbar" class="nav-link" href="/manager/authors" aria-expanded="false">
-                                Authors
+                            <a id="navbar" class="nav-link" href="/manager/person" aria-expanded="false">
+                                People
                             </a>
                         </li>
                         <li class="nav-item">
