@@ -4,15 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ChapterAuthor extends Base
+class ChapterPerson extends Base
 {
     
-    protected $table = 'chapters_authors';
+    protected $table = 'chapters_persons';
 
     protected $fillable = [
         'id',
         'chapter_id',
-        'author_id',
-        'title_id',
+        'person_id',
+        'item_id',
+        'role',
     ];
 }

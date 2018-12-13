@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container">
-        <h3>New Title</h3>
+        <h3>New Item</h3>
     </div>
-    <form action="/manager/titles" method="post" class="col-md-12">
+    <form action="/manager/items" method="post" class="col-md-12">
     @csrf
 
     <input type="hidden" name="active" value="0">
@@ -83,10 +83,10 @@
         </div>
 
         <div class="form-group row col-md-5">
-            <label for="front_cover_authors"><strong>Front Cover Authors</strong></label>
-            <select name="front_cover_authors[]" class="form-control" MULTIPLE>
-                <option value="{{ time() }}" SELECTED>front author {{ date("MY") }}</option>
-                <option value="{{ time() }}" SELECTED>front author2 {{ date("MY") }}</option>
+            <label for="front_cover_persons"><strong>Front Cover Persons</strong></label>
+            <select name="front_cover_persons[]" class="form-control" MULTIPLE>
+                <option value="{{ time() }}" SELECTED>front person {{ date("MY") }}</option>
+                <option value="{{ time() }}" SELECTED>front person2 {{ date("MY") }}</option>
             </select>
         </div>
         <div class="form-group row col-md-5">
@@ -95,10 +95,10 @@
         </div>
 
         <div class="form-group row col-md-5">
-            <label for="back_cover_authors"><strong>Back Cover Authors</strong></label>
-            <select name="back_cover_authors[]" class="form-control" MULTIPLE>
-                <option value="{{ time() }}" SELECTED>back author {{ date("MY") }}</option>
-                <option value="{{ time() }}" SELECTED>back author2 {{ date("MY") }}</option>
+            <label for="back_cover_persons"><strong>Back Cover Persons</strong></label>
+            <select name="back_cover_persons[]" class="form-control" MULTIPLE>
+                <option value="{{ time() }}" SELECTED>back person {{ date("MY") }}</option>
+                <option value="{{ time() }}" SELECTED>back person2 {{ date("MY") }}</option>
             </select>
         </div>
 
@@ -111,8 +111,8 @@
         </div>
             
         <div class="form-group ">
-            <button class="btn btn-success">Add Title</button>
-            &nbsp;<a href="/manager/titles" style="color:red;">reset</a>
+            <button class="btn btn-success">Add Item</button>
+            &nbsp;<a href="/manager/items" style="color:red;">reset</a>
         </div>
 
     </form>

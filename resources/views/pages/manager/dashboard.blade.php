@@ -14,8 +14,8 @@
                         </div>
                     @endif
 
-                    <div>Total Titles: {{ number_format($titles) }}</div>
-                    <div>Total Authors: {{ number_format($authors) }}</div>
+                    <div>Total Items: {{ number_format($items) }}</div>
+                    <div>Total Persons: {{ number_format($persons) }}</div>
                     <div>Total Users: {{ number_format($users) }}</div>
                 </div>
             </div>

@@ -2,10 +2,10 @@
 
 @section('content')
 
-<h1>Title Details</h1>
+<h1>Item Details</h1>
 
 @php
-    dd($title->toArray());
+    dd($item->toArray());
 @endphp
 
 @endsection

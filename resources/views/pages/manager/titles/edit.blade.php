@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h3>Edit Title</h3>
+        <h3>Edit Item</h3>
     </div>
 
 @endsection

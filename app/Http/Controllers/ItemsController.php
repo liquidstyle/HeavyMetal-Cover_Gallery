@@ -1,24 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Manager;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-use App\Title;
+use App\Item;
 
-class TitlesController extends Controller
+class ItemsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $titles = Title::orderBy('yearmonth','asc')->paginate(25);
-
-        return view('pages.manager.titles.index')->with('titles',$titles);
+        return view('pages.public.items.index_vue')->with('user',\Auth::user());
     }
 
     /**
@@ -28,7 +25,7 @@ class TitlesController extends Controller
      */
     public function create()
     {
-        return view('pages.manager.titles.create');
+        //
     }
 
     /**
@@ -39,32 +36,7 @@ class TitlesController extends Controller
      */
     public function store(Request $request)
     {
-        $params = $request->input();
-
-        if(strlen($params['year']) && strlen($params['month']))
-        {
-            $params['yearmonth'] = $params['year'].$params['month'];
-        }
-
-        if(count($params['front_cover_authors']))
-        {
-            $params['front_cover_authors'] = json_encode($params['front_cover_authors']);
-        }
-
-        if(count($params['back_cover_authors']))
-        {
-            $params['back_cover_authors'] = json_encode($params['back_cover_authors']);
-        }
-
-        if(count($params['signed_by']))
-        {
-            $params['signed_by'] = json_encode($params['signed_by']);
-        }
-        
-        $title = Title::create($params);
-        return redirect()->action(
-            'Manager\TitlesController@show', ['id' => $title->id]
-        )->with('message','Title Created');
+        //
     }
 
     /**
@@ -75,7 +47,8 @@ class TitlesController extends Controller
      */
     public function show($id)
     {
-        return view('pages.manager.titles.show')->with('title',Title::find($id));
+        $item = Item::find($id);
+        return view('pages.items.show')->with('item',$item);
     }
 
     /**

@@ -8,11 +8,11 @@
     @endif
 
     <div class="container">
-        <h3>Title Details</h3>
+        <h3>Item Details</h3>
     </div>
 
     @php
-        echo '<pre>'.print_r($title->toArray(),TRUE).'</pre>';
+        echo '<pre>'.print_r($item->toArray(),TRUE).'</pre>';
     @endphp
 
 @endsection

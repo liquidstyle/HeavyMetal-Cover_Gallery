@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Author extends Base
+class Person extends Base
 {
     
     protected $fillable = [
@@ -14,7 +14,6 @@ class Author extends Base
 
     public function chapters()
     {
-        return $this->hasMany('App\ChapterAuthor');
-        return $this->hasManyThrough('App\Chapter','App\ChapterAuthor','author_id','id','chapter_id');
+        return $this->belongsToMany('App\Chapter','chapters_persons');
     }
 }

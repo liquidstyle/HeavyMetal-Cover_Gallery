@@ -1,22 +1,45 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-use App\Author;
+use App\Person;
 
-class AuthorsController extends Controller
+class PersonsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Author::with('chapters')->paginate(25);
+
+        $format = $request->input('format');
+        $persons = Person::orderBy('name','asc')->paginate(25);
+
+        switch($format)
+        {
+            case 'list':
+                $view = 'pages.public.persons.index_list';
+                break;
+            default:
+                $view = 'pages.public.persons.index_grid';
+                break;
+        }
+        
+        return view($view)->with('persons',$persons);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -37,6 +60,18 @@ class AuthorsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+    {
+        $person = Person::find($id);
+        return view('pages.persons.show')->with('person',$person);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         //
     }

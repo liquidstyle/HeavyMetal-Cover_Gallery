@@ -22,17 +22,17 @@
             }
         },
         beforeMount(){
-            this.fetchTitles()
+            this.fetchItems()
         },
         mounted() {
             
         },
         methods: {
-            fetchTitles: function()
+            fetchItems: function()
             {
                 var $this = this;
                 $this.covers = []
-                let url = '/api/titles';
+                let url = '/api/items';
                 axios.get(url)
                     .then( function(res) {
                         $this.covers = []

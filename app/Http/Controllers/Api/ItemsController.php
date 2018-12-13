@@ -1,31 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-use App\Title;
+use App\Item;
 
-class TitlesController extends Controller
+class ItemsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        return view('pages.public.titles.index_vue')->with('user',\Auth::user());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Item::with('chapters.persons')->paginate(25);
     }
 
     /**
@@ -46,18 +37,6 @@ class TitlesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        $title = Title::find($id);
-        return view('pages.titles.show')->with('title',$title);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }

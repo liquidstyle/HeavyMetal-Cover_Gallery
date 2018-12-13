@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Manager;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Title;
+use App\Person;
 
-class TitlesController extends Controller
+class PersonsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,20 @@ class TitlesController extends Controller
      */
     public function index()
     {
-        return Title::with('chapters')->paginate(25);
+        $persons = Person::orderBy('name','asc')->paginate(25);
+
+        $view = 'pages.manager.persons.index';
+        return view($view)->with('persons',$persons);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('pages.manager.persons.create');
     }
 
     /**
@@ -37,6 +50,17 @@ class TitlesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+    {
+        return view('pages.manager.persons.show')->with('person',Person::find($id));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         //
     }

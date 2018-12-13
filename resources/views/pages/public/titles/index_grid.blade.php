@@ -2,6 +2,6 @@
 
 @section('content')
 
-<h1>All Titles</h1>
+<h1>All Items</h1>
 Grid
 @endsection

@@ -11,11 +11,16 @@ class Chapter extends Base
         'id',
         'name',
         'pagenum',
-        'title_id'
+        'item_id'
     ];
 
-    public function authors()
+    public function persons()
     {
-        $this->hasManyThrough('App\ChapterAuthor','App\Author');
+        return $this->belongsToMany('App\Person','chapters_persons');
+    }
+
+    public function item()
+    {
+        return $this->belongsTo('App\Item');
     }
 }

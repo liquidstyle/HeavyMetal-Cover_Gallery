@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use Storage;
-use App\Title;
+use App\Item;
 use App\Chapter;
-use App\Author;
-use App\ChapterAuthor;
+use App\Person;
+use App\ChapterPerson;
 use App\Tag;
+use App\Taggable;
 
 class IngestController extends Controller
 {
@@ -24,43 +27,44 @@ class IngestController extends Controller
         $json = Storage::disk('local')->get('data.json');
         $data = json_decode($json);
         $i = 0;
-        foreach($data->data as $idx => $title)
+        foreach($data->data as $idx => $item)
         {
-            $titleParams = [
-                'id'                    => $title->id,
-                'name'                  => $title->name,
-                'month'                 => $title->month,
-                'year'                  => $title->year,
-                'yearmonth'             => $title->year.$title->month,
-                'cover_variant'         => $title->cover_variant,
-                'special_issue'         => $title->special_issue,
-                'front_cover_path'      => $title->coverphoto->src,
+            $itemParams = [
+                'id'                    => $item->id,
+                'name'                  => $item->name,
+                'month'                 => $item->month,
+                'year'                  => $item->year,
+                'yearmonth'             => $item->year.$item->month,
+                'cover_variant'         => $item->cover_variant,
+                'special_issue'         => $item->special_issue,
+                'front_cover_path'      => $item->coverphoto->src,
                 'front_cover_name'      => 'Front Cover',
-                'front_cover_authors'   => '',
+                'front_cover_persons'   => '',
                 'back_cover_path'       => '',
                 'back_cover_name'       => 'Back Cover',
-                'back_cover_authors'    => '',
+                'back_cover_persons'    => '',
             ];
 
-            foreach($title->tags as $key => $val)
+            // Setup Tags
+            $item->tags = [];
+            if(strlen($item->year))
             {
-                $tagParams = [
-                    'id'        => $key,
-                    'tag'       => $val,
-                    'title_id'  => $title->id,
-                ];
-                Tag::create($tagParams);
+                $item->tags[] = $item->year;
             }
-
-            $chapters_authors   = [];
-            $authors            = [];
-            foreach($title->toc as $idx2 => $toc)
+            if(strlen($item->special_issue))
+            {
+                $item->tags[] = 'Special Issue';
+            }
+            
+            $chapters_persons   = [];
+            $persons            = [];
+            foreach($item->toc as $idx2 => $toc)
             {
                 if($toc->title == 'Back Cover')
                 {
-                    if($titleParams['front_cover_path'] != $toc->coverphoto->src)
+                    if($itemParams['front_cover_path'] != $toc->coverphoto->src)
                     {
-                        $titleParams['back_cover_path'] = $toc->coverphoto->src;
+                        $itemParams['back_cover_path'] = $toc->coverphoto->src;
                     }
                     break;
                 }
@@ -75,30 +79,36 @@ class IngestController extends Controller
                     'id'        => $toc->id,
                     'name'      => $toc->title,
                     'pagenum'   => $toc->pagenum,
-                    'title_id'  => $title->id
+                    'item_id'  => $item->id
                 ];
-                Chapter::create($chapterParams);
+                $chapterObj = Chapter::create($chapterParams);
+                $chapterObj->id = $toc->id;
+                $chapterObj->save();
+                
 
                 foreach($toc->artists as $idx3 => $artist)
                 {
-                    $authors[$artist->id] = $artist->name;
-                    $chapters_authors[$toc->id.'.'.$artist->id] = ['chapter_id' => $toc->id, 'author_id' => $artist->id];
+                    $persons[$artist->id] = $artist->name;
+                    $chapters_persons[$toc->id.'.'.$artist->id] = ['chapter_id' => $toc->id, 'person_id' => $artist->id];
                 }
             }
 
-            foreach($authors as $author_id => $author_name)
+            foreach($persons as $person_id => $person_name)
             {
-                $authorParams = [
-                    'id'            => $author_id,
-                    'name'   => (strlen($author_name) ? $author_name : 'Missing')
+                $personParams = [
+                    'id'     => $person_id,
+                    'name'   => (strlen($person_name) ? $person_name : 'Missing')
                 ];
                     
-                Author::create($authorParams);
+                $personObj = Person::create($personParams);
+
+                $personObj->id = $person_id;
+                $personObj->save();
             }
             
-            foreach($chapters_authors as $key => $val)
+            foreach($chapters_persons as $key => $val)
             {
-                if(strlen($val['author_id']) == 0)
+                if(strlen($val['person_id']) == 0)
                 {
                     // echo '<pre>'.print_r($val,TRUE).'</pre>';
                     continue;
@@ -106,16 +116,31 @@ class IngestController extends Controller
                 $caParams = [
                     'id'            => Str::uuid(),
                     'chapter_id'    => $val['chapter_id'],
-                    'author_id'     => $val['author_id'],
-                    'title_id'      => $title->id
+                    'person_id'     => $val['person_id'],
+                    'role'          => 'artist',
+                    'item_id'      => $item->id
                 ];
-                ChapterAuthor::create($caParams);
-            }
 
-            Title::create($titleParams);
+                ChapterPerson::create($caParams);
+            }
+            
+            $itemObj = Item::create($itemParams);
+            
+            // Save with original ID
+            $itemObj->id = $item->id;
+            $itemObj->save();
+
+            foreach($item->tags as $idx => $tag)
+            {
+                $tagObj = Tag::firstOrNew(['tag' => $tag]);
+                $tagObj->tag = $tag;
+                $tagObj->save();
+
+                $itemObj->tag($tagObj);
+            }
             $i++;
         }
-        die("Ingested ".$i." Titles");
+        die("Ingested ".$i." Items");
     }
 
     /**

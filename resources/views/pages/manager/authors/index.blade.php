@@ -2,15 +2,15 @@
 
 @section('content')
     <div class="container">
-        <h3>Authors</h3>
+        <h3>Persons</h3>
     </div>
-    @if(count($authors) > 0)
+    @if(count($persons) > 0)
 
         <div class="float-left">
-            {{ $authors->links() }}
+            {{ $persons->links() }}
         </div>
         <div class="float-right">
-            <a href="/manager/authors/create" class="btn btn-primary">Add Author</a>
+            <a href="/manager/persons/create" class="btn btn-primary">Add Person</a>
         </div>
         <table class="table table-hover table-bordered table-striped">
             <col width="10%">
@@ -23,10 +23,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach( $authors as $idx => $author)
+                @foreach( $persons as $idx => $person)
                     <tr>
                         <td>
-                            <a href="/manager/authors/{{ $author->id }}">{{ $author->name }}</a>
+                            <a href="/manager/persons/{{ $person->id }}">{{ $person->name }}</a>
                         </td>
                     </tr>
                 @endforeach
@@ -34,8 +34,8 @@
             <tfoot>
             </tfoot>
         </table>
-        {{ $authors->links() }}
+        {{ $persons->links() }}
     @else
-        <p>No Authors Found
+        <p>No Persons Found
     @endif
 @endsection

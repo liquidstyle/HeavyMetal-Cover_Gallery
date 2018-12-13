@@ -2,10 +2,13 @@
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
 
-class Title extends Base
+class Item extends Base
 {
+    public $incrementing = false;
+
     protected $fillable = [
         'id',
         'name',
@@ -16,10 +19,10 @@ class Title extends Base
         'special_issue',
         'front_cover_path',
         'front_cover_name',
-        'front_cover_author',
+        'front_cover_person',
         'back_cover_path',
         'back_cover_name',
-        'back_cover_author',
+        'back_cover_person',
         'description',
         'signed_by',
         'active',
@@ -31,8 +34,8 @@ class Title extends Base
         return $this->hasMany('App\Chapter');
     }
 
-    public function tags()
+    public function persons()
     {
-        return $this->hasMany('App\Tag');
+        return $this->belongsToMany('App\Person','chapters_persons');
     }
 }

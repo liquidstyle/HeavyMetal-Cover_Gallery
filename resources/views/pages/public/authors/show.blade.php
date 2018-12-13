@@ -2,10 +2,10 @@
 
 @section('content')
 
-<h1>Author Details</h1>
+<h1>Person Details</h1>
 
 @php
-    dd($author->toArray());
+    dd($person->toArray());
 @endphp
 
 @endsection

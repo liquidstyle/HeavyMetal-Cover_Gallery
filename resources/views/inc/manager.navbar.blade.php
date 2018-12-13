@@ -24,13 +24,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="/titles?format=list" aria-expanded="false">
-                        Titles 
+                    <a id="navbar" class="nav-link" href="/items?format=list" aria-expanded="false">
+                        Items 
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="/authors?format=list" aria-expanded="false">
-                        Authors
+                    <a id="navbar" class="nav-link" href="/persons?format=list" aria-expanded="false">
+                        Persons
                     </a>
                 </li>
                 @endguest
@@ -60,16 +60,16 @@
                             <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}">
                                 My Profile
                             </a>
-                            <a class="dropdown-item" href="/titles?format=grid&filter=owned">
+                            <a class="dropdown-item" href="/items?format=grid&filter=owned">
                                 My Collection
                             </a>
-                            <a class="dropdown-item" href="/titles?format=grid&filter=notowned">
+                            <a class="dropdown-item" href="/items?format=grid&filter=notowned">
                                 NOT In My Collection
                             </a>
-                            <a class="dropdown-item" href="/titles?format=grid&filter=favorites">
+                            <a class="dropdown-item" href="/items?format=grid&filter=favorites">
                                 My Favorites
                             </a>
-                            <a class="dropdown-item" href="/titles?format=grid&filter=wishlist">
+                            <a class="dropdown-item" href="/items?format=grid&filter=wishlist">
                                 My Wishlist
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}" style="font-weight:bold;color:red;"

@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="container">
-        <h3>Author Details</h3>
+        <h3>Person Details</h3>
     </div>
 
     @php
-        echo '<pre>'.print_r($author->toArray(),TRUE).'</pre>';
+        echo '<pre>'.print_r($person->toArray(),TRUE).'</pre>';
     @endphp
 @endsection

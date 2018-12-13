@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>All Authors</h1>
+<h1>All Persons</h1>
 
-@if(count($authors) > 0)
+@if(count($persons) > 0)
 
     <div class="float-left">
-        {{ $authors->links() }}
+        {{ $persons->links() }}
     </div>
     <table class="table table-hover table-bordered table-striped">
         <col width="10%">
@@ -19,10 +19,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach( $authors as $idx => $author)
+            @foreach( $persons as $idx => $person)
                 <tr>
                     <td>
-                        <a href="/authors/{{ $author->id }}">{{ $author->name }}</a>
+                        <a href="/persons/{{ $person->id }}">{{ $person->name }}</a>
                      </td>
                 </tr>
             @endforeach
@@ -30,8 +30,8 @@
         <tfoot>
         </tfoot>
     </table>
-    {{ $authors->links() }}
+    {{ $persons->links() }}
 @else
-    <p>No Authors Found
+    <p>No Persons Found
 @endif
 @endsection

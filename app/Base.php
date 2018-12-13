@@ -19,4 +19,14 @@ class Base extends Model
             $instance->id = Str::upper(Str::uuid());
         });
     }
+
+    public function tag($tag)
+    {
+        return $this->tags()->attach($tag);
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany('App\Tag', 'taggable');
+    }
 }

@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Manager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Title;
-use App\Author;
+use App\Item;
+use App\Person;
 use App\User;
 
 class DashboardController extends Controller
@@ -18,14 +18,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $titles = Title::count();
-        $authors = Author::count();
+        $items = Item::count();
+        $persons = Person::count();
         $users = User::count();
 
         $view = 'pages.manager.dashboard';
         return view($view)
-            ->with('titles',$titles)
-            ->with('authors',$authors)
+            ->with('items',$items)
+            ->with('persons',$persons)
             ->with('users',$users)
             ;
     }

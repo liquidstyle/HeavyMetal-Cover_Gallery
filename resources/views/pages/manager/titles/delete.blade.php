@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h3>Delete Title</h3>
+        <h3>Delete Item</h3>
     </div>
 
 @endsection
