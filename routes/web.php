@@ -20,12 +20,16 @@ Auth::routes();
 // Public 
 Route::get('/dashboard', 'ActivitiesController@index')->name('dashboard');
 Route::get('/profile', 'ProfileController@index');
+
 Route::get('/items', 'ItemsController@index');
+Route::get('/items/{id}', 'ItemsController@show');
+
 Route::get('/persons', 'PersonsController@index');
+Route::get('/persons/{id}', 'PersonsController@show');
+
 Route::get('/activity', 'ActivitiesController@index');
 
 
-Route::resource('/ingest', 'Manager\IngestController');
 
 
 // Manager Routes

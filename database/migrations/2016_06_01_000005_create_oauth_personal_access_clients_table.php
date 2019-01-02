@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChapterAuthorsTable extends Migration
+class CreateOauthPersonalAccessClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateChapterAuthorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('chapters_authors', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->uuid('chapter_id');
-            $table->uuid('author_id');
-            $table->uuid('title_id');
+        Schema::create('oauth_personal_access_clients', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('client_id')->index();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateChapterAuthorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chapters_authors');
+        Schema::dropIfExists('oauth_personal_access_clients');
     }
 }

@@ -36,8 +36,10 @@
         <main class="py-4">
 
             @include('inc.messages')
-
-            @yield('content')
+            
+            <div id="app">
+                @yield('content')
+            </div>
 
         </main>
 

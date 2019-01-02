@@ -16,8 +16,6 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                @guest
-                @else
                 <li class="nav-item">
                     <a id="navbar" class="nav-link" href="/activity" aria-expanded="false">
                         Activity Feed
@@ -33,7 +31,11 @@
                         Persons
                     </a>
                 </li>
-                @endguest
+                <li class="nav-item">
+                    <a id="navbar" class="nav-link" href="/ingest" aria-expanded="false" target="ingest">
+                        Ingest
+                    </a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

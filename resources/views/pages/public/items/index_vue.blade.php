@@ -7,5 +7,7 @@
 @endsection
 
 @section('scripts')
-    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script>
+    <script>
+        window.auth_user = {!! json_encode($auth_user); !!};
+    </script>
 @endsection

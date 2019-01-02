@@ -15,7 +15,7 @@ class ItemsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('pages.public.items.index_vue')->with('user',\Auth::user());
+        return view('pages.public.items.index_vue')->with('auth_user',\Auth::user());
     }
 
     /**
@@ -48,7 +48,7 @@ class ItemsController extends Controller
     public function show($id)
     {
         $item = Item::find($id);
-        return view('pages.items.show')->with('item',$item);
+        return view('pages.public.items.show')->with('item',$item);
     }
 
     /**

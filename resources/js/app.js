@@ -17,6 +17,9 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('covers', require('./components/CoversComponent.vue'));
+Vue.component('item-like', require('./components/ItemLike.vue'));
+Vue.component('item-favorite', require('./components/ItemFavorite.vue'));
+Vue.component('item-wishlist', require('./components/ItemWishlist.vue'));
 
 // import ES6 style
 import {VueMasonryPlugin} from 'vue-masonry';

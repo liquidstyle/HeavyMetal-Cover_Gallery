@@ -18,3 +18,8 @@ yarn-error.log
 /HeavyMetal-Cover_Gallery.code-workspace
 /sql
 /local.assets/HeavyMetal-Cover_Gallery.code-workspace
+/.env.fango
+/public/data/fango_data.csv
+/public/data/hm_data.1.csv
+/public/data/hm_likes_counts.csv
+/public/data/hm_likes.1.csv

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Person;
+use App\Http\Resources\PersonResource;
 
 class PersonsController extends Controller
 {
@@ -38,7 +39,7 @@ class PersonsController extends Controller
      */
     public function show($id)
     {
-        //
+        return new PersonResource(Person::with(['items','chapters'])->find($id));
     }
 
     /**

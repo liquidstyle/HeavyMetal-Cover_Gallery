@@ -29,6 +29,7 @@ class Item extends Base
         'status'
     ];
 
+
     public function chapters()
     {
         return $this->hasMany('App\Chapter');
@@ -37,5 +38,25 @@ class Item extends Base
     public function persons()
     {
         return $this->belongsToMany('App\Person','chapters_persons');
+    }
+
+    public function covers($type="front")
+    {
+        $key = $type.'cover';
+        return $this->images()->where('key',$key)->get();
+    }
+
+    public function front_cover()
+    {
+        $covers = $this->images()->where('key','frontcover')->get();
+        foreach($covers as $cover)
+        {
+            return $cover->path;
+        }
+    }
+
+    public function mylike()
+    {
+        $this->morphMany('App\Like','likeable')->where('user_id',auth()->user()->id);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAuthorsTable extends Migration
+class CreateItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateAuthorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('authors', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('name');
-            $table->string('website')->nullable();
-            $table->string('wikipedia')->nullable();
-            $table->string('facebook')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('instagram')->nullable();
-            $table->longtext('bio')->nullable();
+            $table->string('cover_variant')->nullable();
+            $table->string('special_issue')->nullable();
+            $table->mediumInteger('yearmonth')->nullable();
+            $table->smallInteger('month')->nullable();
+            $table->smallInteger('year')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ class CreateAuthorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('authors');
+        Schema::dropIfExists('items');
     }
 }

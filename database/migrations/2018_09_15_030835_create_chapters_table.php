@@ -16,8 +16,8 @@ class CreateChaptersTable extends Migration
         Schema::create('chapters', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('name');
-            $table->mediumInteger('pagenum');
-            $table->uuid('title_id');
+            $table->mediumInteger('pagenum')->nullable();
+            $table->uuid('item_id');
             $table->timestamps();
         });
     }

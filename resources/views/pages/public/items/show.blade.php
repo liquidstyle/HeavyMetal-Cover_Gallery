@@ -2,10 +2,8 @@
 
 @section('content')
 
-<h1>Item Details</h1>
-
-@php
-    dd($item->toArray());
-@endphp
+<h1>{{ $item->name }}</h1>
+<div>Special Issue: {{ $item->special_issue }}</div>
+<div>Cover Variant {{ $item->cover_variant }}</div>
 
 @endsection

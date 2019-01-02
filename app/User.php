@@ -6,10 +6,11 @@ use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
 
     public $incrementing = false;
 
@@ -44,4 +45,25 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function liked()
+    {
+        return Item::whereLikedBy($this->id) // find only items where user liked them
+            ->with('likeCounter') // highly suggested to allow eager load
+            ->get();
+    }
+
+    public function favorited()
+    {
+        return Item::whereFavoritedBy($this->id) // find only items where user favorited them
+            ->with('favoriteCounter') // highly suggested to allow eager load
+            ->get();
+    }
+
+    public function wishlisted()
+    {
+        return Item::whereWishlistedBy($this->id) // find only items where user wishlisted them
+            ->with('wishlistCounter') // highly suggested to allow eager load
+            ->get();
+    }
 }

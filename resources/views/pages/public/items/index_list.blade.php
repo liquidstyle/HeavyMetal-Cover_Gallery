@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <h1>All Items</h1>
 
 @if(count($items) > 0)
@@ -10,10 +11,11 @@
     </div>
     <table class="table table-hover table-bordered table-striped">
         <col width="10%">
-        <col width="90%">
+        <col width="80%">
+        <col width="10%">
         <thead>
             <tr>
-                <th>
+                <th colspan="2">
                     Issue
                 </th>
                 <th>
@@ -25,7 +27,7 @@
             @foreach( $items as $idx => $item)
                 <tr>
                     <td class="text-center">
-                         <img src="{{ $item->front_cover_path }}" width="150">
+                         <img src="{{ $item->front_cover() }}" width="150">
                     </td>
                     <td>
                         <div><h3><a href="/items/{{ $item->id }}">{{ $item->name }}</a></h3></div>
@@ -33,6 +35,11 @@
                         <div>Cover Variant: {{ $item->variant_cover }}</div>
                         <div>Front Cover: {{ $item->front_cover_person }} <em>"{{ $item->front_cover_name }} "</em></div>
                         <div>Back Cover: {{ $item->back_cover_person }} <em>"{{ $item->back_cover_name }} "</em></div>
+                     </td>
+                     <td>
+                         <item-like></item-like>
+                         <item-favorite></item-favorite>
+                         <item-wishlist></item-wishlist>
                      </td>
                 </tr>
             @endforeach
