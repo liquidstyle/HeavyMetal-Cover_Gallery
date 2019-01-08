@@ -13527,3 +13527,15 @@ a.text-dark:focus {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.border_book {
+  border-top: 3px solid brown;
+}
+
+.border_magazine {
+  border-top: 3px solid green;
+}
+
+.border_comic {
+  border-top: 3px solid orange;
+}
+

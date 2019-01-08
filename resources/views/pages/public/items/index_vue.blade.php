@@ -2,7 +2,7 @@
 
 @section('content')
     <div id="app">
-        <covers></covers>
+        <covers v-bind:item_type="{{ app('request')->input('type') }}"></covers>
     </div>
 @endsection
 

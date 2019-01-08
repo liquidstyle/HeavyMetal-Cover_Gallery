@@ -21,6 +21,9 @@
     },
     "dependencies": {
         "font-awesome": "^4.7.0",
-        "vue-masonry": "^0.11.6"
+        "validate.js": "^0.12.0",
+        "vue-masonry": "^0.11.6",
+        "vue-router": "^3.0.2",
+        "vuex": "^3.0.1"
     }
 }

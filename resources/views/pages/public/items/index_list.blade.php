@@ -3,7 +3,6 @@
 @section('content')
 
 <h1>All Items</h1>
-
 @if(count($items) > 0)
 
     <div class="float-left">
@@ -25,6 +24,7 @@
         </thead>
         <tbody>
             @foreach( $items as $idx => $item)
+            
                 <tr>
                     <td class="text-center">
                          <img src="{{ $item->front_cover() }}" width="150">
@@ -37,9 +37,9 @@
                         <div>Back Cover: {{ $item->back_cover_person }} <em>"{{ $item->back_cover_name }} "</em></div>
                      </td>
                      <td>
-                         <item-like></item-like>
-                         <item-favorite></item-favorite>
-                         <item-wishlist></item-wishlist>
+                         <item-like :item_id="{{ $item->id }}"></item-like>
+                         <item-favorite :item_id="{{ $item->id }}"></item-favorite>
+                         <item-wishlist :item_id="{{ $item->id }}"></item-wishlist>
                      </td>
                 </tr>
             @endforeach

@@ -20,14 +20,15 @@ class ItemsController extends Controller
     {
         $page = (request('page') > 0 ? request('page') - 1 : 0);
         $perpage = (request('perpage') > 0 ? request('perpage') : 25);
-        
+        $type = (request('type') ? request('type') : 'magazine');
+
         if(strlen(request('with')))
         {
             $with = explode(',',request('with'));
             // $items = Item::with($with)->forPage($page,$perpage)->get();
-            $items = Item::with($with)->paginate($perpage);
+            $items = Item::where('type',$type)->with($with)->paginate($perpage);
         } else {
-            $items = Item::paginate($perpage);
+            $items = Item::where('type',$type)->paginate($perpage);
         }
 
         return new ItemResource($items);

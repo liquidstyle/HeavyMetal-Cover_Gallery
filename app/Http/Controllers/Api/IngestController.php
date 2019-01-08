@@ -31,7 +31,9 @@ class IngestController extends Controller
     public function index()
     {
         // $this->dump();
-        $this->process_csv();
+        $this->process_csv('hm_data.csv');
+        $this->process_csv('hm_data_comics.csv');
+        $this->process_csv('hm_data_classic_books.csv');
         $this->process_likes();
         die();
     }
@@ -63,9 +65,9 @@ class IngestController extends Controller
         return ;
     }
 
-    public function process_csv()
+    public function process_csv($file="hm_data.csv")
     {
-        $file       = public_path().'/data/hm_data.csv';
+        $file       = public_path().'/data/'.$file;
         $csv        = file_get_contents($file);
         $formatter  = Formatter::make($csv, Formatter::CSV);
         $json       = json_decode($formatter->toJson());
@@ -79,7 +81,7 @@ class IngestController extends Controller
             $i++;
         }
 
-        echo "Ingested ".$i." Items<br>";
+        echo "Ingested ".$i." Items ('.$file.')<br>";
 
         return ;
     }
@@ -94,6 +96,7 @@ class IngestController extends Controller
                 $issue = new stdClass();
                 $issue->id                  = $row->issue_id;
                 $issue->name                = $row->issue_name;
+                $issue->type                = $row->issue_type;
                 $issue->cover_variant       = $row->issue_cover_variant;
                 $issue->special_issue       = $row->issue_special_issue;
                 $issue->published_month     = $row->issue_published_month;
@@ -130,16 +133,23 @@ class IngestController extends Controller
 
     public function process($item)
     {
-
-            $itemObj = Item::firstOrNew(['id'=>$item->id,'name'=>$item->name,'month'=>$item->published_month,'year'=>$item->published_year]);
+            if(strlen($item->id))
+            {
+                $itemObj = Item::firstOrNew(['id'=>$item->id,'name'=>$item->name,'month'=>$item->published_month,'year'=>$item->published_year]);
+            } else {
+                $itemObj = Item::firstOrNew(['name'=>$item->name,'month'=>$item->published_month,'year'=>$item->published_year]);
+            }
             $itemObj->yearmonth = $item->published_year.$item->published_month;
             $itemObj->cover_variant = $item->cover_variant;
             $itemObj->special_issue = $item->special_issue;
+            $itemObj->type = $item->type;
             $itemObj->save();
-
-            $itemObj->id = $item->id;
-            $itemObj->save();
-            
+// echo '<br>'.$itemObj->name;
+            if(strlen($item->id))
+            {
+                $itemObj->id = $item->id;
+                $itemObj->save();
+            }
             // Setup Tags
             $item->tags = [];
             if(strlen($item->published_year))
@@ -159,7 +169,7 @@ class IngestController extends Controller
                 $imageObj->name = 'Front Cover';
                 $imageObj->path = $item->front_image;
                 $imageObj->save();
-
+// echo ' - FRONT: '.$imageObj->path;
                 $itemObj->image($imageObj);
             }
 
@@ -171,7 +181,7 @@ class IngestController extends Controller
                 $imageObj->name = 'Back Cover';
                 $imageObj->path = $item->back_image;
                 $imageObj->save();
-
+// echo ' - BACK: '.$imageObj->path;
                 $itemObj->image($imageObj);
             }
 

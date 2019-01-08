@@ -1,8 +1,7 @@
 <template>
-    
     <div class="row">
         <div class="col-md-2 mb-5" v-if="covers.length > 0" v-for="cover in covers">
-                <div class="card">
+                <div :class="'card border_'+cover.type">
                     <div class="card-header">
                         <div>{{ cover.name }}</div>
                         <!-- <div v-if="cover.special_issue">{{ cover.special_issue }}</div>
@@ -33,9 +32,12 @@
 
 <script>
     export default {
+        name: 'covers',
         data() {
             return {
                 auth_user: auth_user,
+                item_type : 'magazine',
+                perpage: 5,
                 mylikes : {},
                 myfavorites : {},
                 mywishlists : {},
@@ -148,13 +150,28 @@
                         console.log(error);
                     })
             },
-
+            fetchMagazines: function()
+            {
+                this.item_type = 'magazine'
+                return this.fetchItems()
+            },
+            fetchBooks: function()
+            {
+                this.item_type = 'book'
+                return this.fetchItems()
+            },
+            fetchComics: function()
+            {
+                this.item_type = 'comics'
+                return this.fetchItems()
+            },
             fetchItems: function()
             {
                 var $this = this;
 
                 $this.covers = []
-                let url = '/api/items?with=images&perpage=250';
+                let url = '/api/items?type='+this.item_type+'&with=images&perpage='+this.perpage+'';
+
                 axios.get(url)
                     .then( function(res) {
                         $this.covers = []

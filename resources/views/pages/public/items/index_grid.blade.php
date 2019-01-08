@@ -3,5 +3,5 @@
 @section('content')
 
 <h1>All Items</h1>
-Grid
+
 @endsection

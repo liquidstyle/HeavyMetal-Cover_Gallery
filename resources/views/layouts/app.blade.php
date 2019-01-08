@@ -38,7 +38,7 @@
             @include('inc.messages')
             
             <div id="app">
-                @yield('content')
+                <main-app></main-app>
             </div>
 
         </main>

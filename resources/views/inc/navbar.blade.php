@@ -21,19 +21,25 @@
                         Activity Feed
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="/items?format=list" aria-expanded="false">
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#ß" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         Items 
                     </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/magazines">
+                            Magazines
+                        </a>
+                        <a class="dropdown-item" href="/books">
+                            Books
+                        </a>
+                        <a class="dropdown-item" href="/comics">
+                            Comics
+                        </a>
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="/persons?format=list" aria-expanded="false">
-                        Persons
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="/ingest" aria-expanded="false" target="ingest">
-                        Ingest
+                    <a id="navbar" class="nav-link" href="/artists" aria-expanded="false">
+                        Artists/Authors
                     </a>
                 </li>
             </ul>
@@ -62,16 +68,16 @@
                             <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}">
                                 My Profile
                             </a>
-                            <a class="dropdown-item" href="/items?format=grid&filter=owned">
+                            <a class="dropdown-item" href="/mycollection">
                                 My Collection
                             </a>
-                            <a class="dropdown-item" href="/items?format=grid&filter=notowned">
+                            <a class="dropdown-item" href="/mycollection?filter=notowned">
                                 NOT In My Collection
                             </a>
-                            <a class="dropdown-item" href="/items?format=grid&filter=favorites">
+                            <a class="dropdown-item" href="/favorites">
                                 My Favorites
                             </a>
-                            <a class="dropdown-item" href="/items?format=grid&filter=wishlist">
+                            <a class="dropdown-item" href="/wishlist">
                                 My Wishlist
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}" style="font-weight:bold;color:red;"

@@ -15,7 +15,24 @@ class ItemsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('pages.public.items.index_vue')->with('auth_user',\Auth::user());
+        $format = (strlen($request->input('format')) ? $request->input('format') : 'list');
+        $type = (strlen($request->input('type')) ? $request->input('type') : 'magazine');
+
+        switch($format)
+        {
+            case 'list':
+            
+                $items = Item::where('type',$type)->paginate(25);
+                return view('pages.public.items.index_list')
+                    ->with('items',$items);
+            case 'grid':
+                $items = Item::where('type',$type)->paginate(25);
+                return view('pages.public.items.index_grid')
+                    ->with('items',$items);
+            default:
+                $view = 'pages.public.items.index_vue';
+                return view($view)->with('auth_user',\Auth::user());
+        }
     }
 
     /**

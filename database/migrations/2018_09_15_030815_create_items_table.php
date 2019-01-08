@@ -16,6 +16,7 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('name');
+            $table->string('type');
             $table->string('cover_variant')->nullable();
             $table->string('special_issue')->nullable();
             $table->mediumInteger('yearmonth')->nullable();

@@ -15,6 +15,7 @@ class Item extends Base
         'month',
         'year',
         'yearmonth',
+        'type',
         'cover_variant',
         'special_issue',
         'front_cover_path',
